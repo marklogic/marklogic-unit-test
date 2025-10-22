@@ -27,19 +27,27 @@ pipeline{
     DMC_USER     = credentials('MLBUILD_USER')
     DMC_PASSWORD = credentials('MLBUILD_PASSWORD')
   }
-  stages{
-    stage('tests'){
-      steps{
+  stages {
+    stage('tests') {
+      steps {
         setupDockerMarkLogic("ml-docker-db-dev-tierpoint.bed-artifactory.bedford.progress.com/marklogic/marklogic-server-ubi:latest-12")
+
+        sh label: 'deploy-test-app', script: '''#!/bin/bash
+          export JAVA_HOME=$JAVA_HOME_DIR
+          export GRADLE_USER_HOME=$WORKSPACE/$GRADLE_DIR
+          export PATH=$JAVA_HOME/bin:$PATH
+          echo "JAVA_HOME is $JAVA_HOME"
+          cd marklogic-unit-test
+          ./gradlew -i mlWaitTillReady
+          ./gradlew mlTestConnections
+          ./gradlew mlDeploy
+        '''
+
         sh label:'test', script: '''#!/bin/bash
           export JAVA_HOME=$JAVA_HOME_DIR
           export GRADLE_USER_HOME=$WORKSPACE/$GRADLE_DIR
-          export PATH=$GRADLE_USER_HOME:$JAVA_HOME/bin:$PATH
-          echo "JAVA_HOME is $JAVA_HOME"
+          export PATH=$JAVA_HOME/bin:$PATH
           cd marklogic-unit-test
-          ./gradlew mlWaitTillReady
-          ./gradlew mlTestConnections
-          ./gradlew mlDeploy
           echo "mlPassword=admin" > marklogic-junit5/gradle-local.properties
           ./gradlew test || true
         '''
@@ -54,7 +62,7 @@ pipeline{
         sh label:'publish', script: '''#!/bin/bash
           export JAVA_HOME=$JAVA_HOME_DIR
           export GRADLE_USER_HOME=$WORKSPACE/$GRADLE_DIR
-          export PATH=$GRADLE_USER_HOME:$JAVA_HOME/bin:$PATH
+          export PATH=$JAVA_HOME/bin:$PATH
           cp ~/.gradle/gradle.properties $GRADLE_USER_HOME;
           cd marklogic-unit-test
            ./gradlew publish
