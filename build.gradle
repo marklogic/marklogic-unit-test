@@ -12,6 +12,10 @@ subprojects {
 
   repositories {
     mavenCentral()
+
+    maven {
+      url = "https://bed-artifactory.bedford.progress.com:443/artifactory/ml-maven-snapshots/"
+    }
   }
 
   dependencies {
