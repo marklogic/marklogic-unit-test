@@ -1,7 +1,21 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    // Needed for ml-gradle 6.2-SNAPSHOT
+    maven {
+      url = "https://bed-artifactory.bedford.progress.com:443/artifactory/ml-maven-snapshots/"
+    }
+  }
+  dependencies {
+    classpath "com.marklogic:ml-gradle:6.2-SNAPSHOT"
+  }
+}
+
 plugins {
   id "net.saliman.properties" version "1.5.2"
-  id "com.marklogic.ml-gradle" version "6.1.0"
 }
+
+apply plugin: "com.marklogic.ml-gradle"
 
 task createHttpCredentials(type: com.marklogic.gradle.task.MarkLogicTask) {
   doLast {

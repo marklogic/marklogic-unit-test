@@ -12,8 +12,6 @@ def setupDockerMarkLogic(String image){
     echo "Using image: "'''+image+'''
     docker pull '''+image+'''
     MARKLOGIC_IMAGE='''+image+''' MARKLOGIC_LOGS_VOLUME=marklogicLogs docker compose up -d --build
-    echo "Waiting for MarkLogic server to initialize."
-    sleep 30s
   '''
 }
 
@@ -39,6 +37,7 @@ pipeline{
           export PATH=$GRADLE_USER_HOME:$JAVA_HOME/bin:$PATH
           echo "JAVA_HOME is $JAVA_HOME"
           cd marklogic-unit-test
+          ./gradlew mlWaitTillReady
           ./gradlew mlTestConnections
           ./gradlew mlDeploy
           echo "mlPassword=admin" > marklogic-junit5/gradle-local.properties
