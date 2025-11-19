@@ -12,15 +12,11 @@ subprojects {
 
   repositories {
     mavenCentral()
-
-    maven {
-      url = "https://bed-artifactory.bedford.progress.com:443/artifactory/ml-maven-snapshots/"
-    }
   }
 
   dependencies {
     // Forcing Spring to use logback instead of commons-logging
-    testImplementation "ch.qos.logback:logback-classic:1.5.19"
+    testImplementation "ch.qos.logback:logback-classic:1.5.20"
     testImplementation 'org.slf4j:jcl-over-slf4j:2.0.17'
     testImplementation 'org.slf4j:slf4j-api:2.0.17'
 
@@ -28,7 +24,7 @@ subprojects {
     // https://docs.gradle.org/current/userguide/upgrading_version_8.html#test_framework_implementation_dependencies
     // Without this, once using JUnit 5.12 or higher, Gradle will not find any tests and report an error of:
     // org.junit.platform.commons.JUnitException: TestEngine with ID 'junit-jupiter' failed to discover tests
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.14.0"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitVersion}"
   }
 
   javadoc.failOnError = false
