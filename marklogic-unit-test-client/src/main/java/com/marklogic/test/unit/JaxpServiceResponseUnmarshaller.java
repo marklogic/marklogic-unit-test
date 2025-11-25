@@ -8,15 +8,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -83,8 +84,6 @@ public class JaxpServiceResponseUnmarshaller implements ServiceResponseUnmarshal
                         failureXml = toXml(resultNode);
                         break;
                     }
-                } else {
-                    logger.debug("Ignoring Node Type [" + resultNodes.item(j).getNodeType() + "]");
                 }
             }
             testSuiteResult.addTestResult(new TestResult(testName, testTime, failureXml));
@@ -138,7 +137,7 @@ public class JaxpServiceResponseUnmarshaller implements ServiceResponseUnmarshal
     protected String toXml(Node node) {
         try {
             if (transformerFactory == null) {
-                transformerFactory = TransformerFactory.newInstance();
+                transformerFactory = makeNewTransformerFactory();
             }
             Transformer transformer = transformerFactory.newTransformer();
             StringWriter buffer = new StringWriter();
@@ -181,7 +180,7 @@ public class JaxpServiceResponseUnmarshaller implements ServiceResponseUnmarshal
      */
     private String prettyPrintXml(Document doc) throws Exception {
         if (transformerFactory == null) {
-            transformerFactory = TransformerFactory.newInstance();
+            transformerFactory = makeNewTransformerFactory();
         }
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -191,5 +190,28 @@ public class JaxpServiceResponseUnmarshaller implements ServiceResponseUnmarshal
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(baos)));
         return new String(baos.toByteArray());
+    }
+
+    private TransformerFactory makeNewTransformerFactory() {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        // Avoids Polaris warning related to https://cwe.mitre.org/data/definitions/611.html .
+        // From https://stackoverflow.com/questions/32178558/how-to-prevent-xml-external-entity-injection-on-transformerfactory .
+        final String warningMessage = "Unable to set {} on TransformerFactory; cause: {}";
+        try {
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        } catch (TransformerConfigurationException e) {
+            logger.warn(warningMessage, XMLConstants.FEATURE_SECURE_PROCESSING, e.getMessage());
+        }
+        try {
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        } catch (IllegalArgumentException e) {
+            logger.warn(warningMessage, XMLConstants.ACCESS_EXTERNAL_DTD, e.getMessage());
+        }
+        try {
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+        } catch (IllegalArgumentException e) {
+            logger.warn(warningMessage, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, e.getMessage());
+        }
+        return factory;
     }
 }
