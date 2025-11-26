@@ -36,11 +36,11 @@ Next, add the following dependencies:
     dependencies {
       // existing dependencies
       
-      testImplementation "com.marklogic:marklogic-junit5:1.4.0"
+      testImplementation "com.marklogic:marklogic-junit5:2.0.0"
             
       // Forcing Spring to use logback instead of commons-logging
-      testImplementation "ch.qos.logback:logback-classic:1.3.5"
-      testImplementation "org.slf4j:jcl-over-slf4j:1.7.36"
+      testImplementation "ch.qos.logback:logback-classic:1.5.21"
+      testImplementation "org.slf4j:jcl-over-slf4j:2.0.17"
     }
     
 ### Configure gradle.properties
@@ -107,8 +107,8 @@ You'll still be able to leverage all of the testing support in AbstractMarkLogic
 If you'd like to write and execute marklogic-unit-test test modules, add the following to your build.gradle file as well (grab
 the latest version for both dependencies):
 
-    mlBundle "com.marklogic:marklogic-unit-test-modules:1.4.0"
-    testImplementation "com.marklogic:marklogic-unit-test-client:1.4.0"
+    mlBundle "com.marklogic:marklogic-unit-test-modules:2.0.0"
+    testImplementation "com.marklogic:marklogic-unit-test-client:2.0.0"
 
 In addition, add the following to gradle.properties so that you can store test modules in a directory separate from 
 your application modules:
