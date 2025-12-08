@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2018-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
+ */
 package com.marklogic.test.unit;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -45,4 +48,3 @@ public class SampleParameterizedTest implements ArgumentsProvider {
         return Stream.of(testManager.list().toArray(new TestModule[]{})).map(Arguments::of);
     }
 }
-
