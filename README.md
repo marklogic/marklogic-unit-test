@@ -16,7 +16,7 @@ marklogic-unit-test includes the following components:
 1. A MarkLogic library module to help you write your test modules.
 2. A simple web interface for running tests.
 3. Java libraries for running your tests via [JUnit5](https://junit.org/junit5/) and for integrating with other
-   popular Java testing frameworks.
+   popular Java testing frameworks. As of the 2.0.0 release, these now require Java 17 or higher. 
 4. A REST endpoint for integrating with testing frameworks in any language.
 
 Please see [the user guide](https://marklogic-community.github.io/marklogic-unit-test/) to get started with adding
