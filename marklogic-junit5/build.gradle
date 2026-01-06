@@ -1,17 +1,31 @@
+plugins {
+  id "net.saliman.properties" version "1.5.2"
+}
+
 dependencies {
   api project(":marklogic-unit-test-client")
-  api "com.marklogic:ml-javaclient-util:5.0.0"
+  api "com.marklogic:ml-javaclient-util:6.1.0"
   api "org.jdom:jdom2:2.0.6.1"
-  api "org.junit.jupiter:junit-jupiter:5.11.2"
-  api "org.springframework:spring-context:5.3.39"
-  api "org.springframework:spring-test:5.3.39"
-  api "com.fasterxml.jackson.core:jackson-databind:2.17.2"
-  api 'org.slf4j:slf4j-api:2.0.16'
+  api "org.junit.jupiter:junit-jupiter:${junitVersion}"
+  api "org.springframework:spring-context:${springVersion}"
+  api "org.springframework:spring-test:${springVersion}"
+  api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+  api 'org.slf4j:slf4j-api:2.0.17'
   implementation "jaxen:jaxen:2.0.0"
 }
 
 test {
-	useJUnitPlatform()
+  if(project.hasProperty("mlPassword")) {
+    systemProperties = System.properties + [
+      'mlPassword': "${mlPassword}"
+    ]
+  }
+  if(project.hasProperty("mlUsername")) {
+    systemProperties = System.properties + [
+      'mlUsername': "${mlUsername}"
+    ]
+  }
+  useJUnitPlatform()
 }
 
 // Publishing setup - see https://docs.gradle.org/current/userguide/publishing_setup.html .
@@ -58,8 +72,8 @@ publishing {
     maven {
       if (project.hasProperty("mavenUser")) {
         credentials {
-          username mavenUser
-          password mavenPassword
+          username = mavenUser
+          password = mavenPassword
         }
         url publishUrl
         allowInsecureProtocol = true
@@ -67,8 +81,8 @@ publishing {
         name = "central"
         url = mavenCentralUrl
         credentials {
-          username mavenCentralUsername
-          password mavenCentralPassword
+          username = mavenCentralUsername
+          password = mavenCentralPassword
         }
       }
     }

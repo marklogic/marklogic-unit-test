@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2018-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
+ */
 package com.marklogic.junit5;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -18,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstract base class for writing JUnit tests that depend on a connection to MarkLogic via a DatabaseClient. Provides
@@ -47,6 +51,7 @@ public abstract class AbstractMarkLogicTest extends LoggingObject implements Mar
     @Override
     public MarkLogicVersion getMarkLogicVersion() {
         String version = getDatabaseClient().newServerEval().javascript("xdmp.version()").evalAs(String.class);
+        Objects.requireNonNull(version, "Unexpected null MarkLogic version from xdmp.version()");
         return new MarkLogicVersion(version);
     }
 
@@ -216,7 +221,11 @@ public abstract class AbstractMarkLogicTest extends LoggingObject implements Mar
      * @return
      */
     protected XmlNode readDocumentProperties(String uri) {
-        return new XmlNode(getDatabaseClient().newServerEval().xquery(String.format("xdmp:document-properties('%s')", uri)).evalAs(String.class));
+        String result = getDatabaseClient().newServerEval()
+            .xquery(String.format("xdmp:document-properties('%s')", uri))
+            .evalAs(String.class);
+        Objects.requireNonNull(result, "Unexpected null document properties for URI: " + uri);
+        return new XmlNode(result);
     }
 
     /**

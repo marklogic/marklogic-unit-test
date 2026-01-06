@@ -1,0 +1,66 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    // Needed for ml-gradle 6.2-SNAPSHOT
+    maven {
+      url = "https://bed-artifactory.bedford.progress.com:443/artifactory/ml-maven-snapshots/"
+    }
+  }
+  dependencies {
+    classpath "com.marklogic:ml-gradle:6.2-SNAPSHOT"
+  }
+}
+
+plugins {
+  id "net.saliman.properties" version "1.6.0"
+}
+
+apply plugin: "com.marklogic.ml-gradle"
+
+task createHttpCredentials(type: com.marklogic.gradle.task.MarkLogicTask) {
+  doLast {
+    def client = getAppConfig().newAppServicesDatabaseClient("Security")
+    String xquery = """
+xquery version "1.0-ml";
+
+import module namespace sec = "http://marklogic.com/xdmp/security"
+      at "/MarkLogic/security.xqy";
+
+declare option xdmp:mapping "false";
+
+try {
+  sec:remove-credential("marklogic-unit-test-credentials")
+} catch (\$e) {()};
+
+xquery version "1.0-ml";
+
+import module namespace sec = "http://marklogic.com/xdmp/security"
+      at "/MarkLogic/security.xqy";
+
+declare option xdmp:mapping "false";
+
+sec:create-credential(
+   "marklogic-unit-test-credentials",
+   "Credentials for ML Rest Helper Calls",
+   "${mlUsername}",
+   "${mlPassword}",
+   (),
+   (),
+   fn:false(),
+   sec:uri-credential-target("http://localhost:${mlRestPort}/.*","digest"),
+   xdmp:default-permissions()
+)
+""";
+    try {
+      String result
+      result = client.newServerEval().xquery(xquery).evalAs(String.class);
+      if (result != null) {
+        println result
+      }
+    } finally {
+      client.release()
+    }
+  }
+}
+
+mlPostDeploy.dependsOn createHttpCredentials

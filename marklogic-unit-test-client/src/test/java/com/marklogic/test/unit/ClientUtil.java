@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2018-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
+ */
 package com.marklogic.test.unit;
 
 import com.marklogic.client.DatabaseClient;
@@ -16,7 +19,7 @@ public class ClientUtil {
      */
     public static DatabaseClient getClient() {
         if (client == null) {
-            client = DatabaseClientFactory.newClient("localhost", 8008,
+            client = DatabaseClientFactory.newClient("localhost", 8003,
                 new DatabaseClientFactory.DigestAuthContext("admin", "admin"));
         }
         return client;

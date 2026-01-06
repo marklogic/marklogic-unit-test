@@ -11,3 +11,5 @@ marklogic-unit-test-client/bin/
 gradle-local.properties
 .vscode
 bin
+docker/
+dep.txt
