@@ -1,6 +1,6 @@
 This project shows a basic setup for writing JUnit tests with marklogic-junit5 against an application deployed 
-with [ml-gradle](https://github.com/marklogic-community/ml-gradle). In addition, it includes an example of executing
-tests written using [marklogic-unit-test](https://github.com/marklogic-community/marklogic-unit-test) via JUnit.
+with [ml-gradle](https://github.com/marklogic/ml-gradle). In addition, it includes an example of executing
+tests written using [marklogic-unit-test](https://github.com/marklogic/marklogic-unit-test) via JUnit.
 
 ## Trying the project out locally
 

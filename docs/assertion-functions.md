@@ -5,7 +5,7 @@ nav_order: 7
 ---
 
 The list below captures the assertion functions available in the marklogic-unit-test `/test/test-helper.xqy` module.
-You can also [browse the source code](https://github.com/marklogic-community/marklogic-unit-test/blob/master/marklogic-unit-test-modules/src/main/ml-modules/root/test/test-helper.xqy)
+You can also [browse the source code](https://github.com/marklogic/marklogic-unit-test/blob/master/marklogic-unit-test-modules/src/main/ml-modules/root/test/test-helper.xqy)
 for this module to examine these functions.
 
 ```
