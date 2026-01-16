@@ -7,7 +7,7 @@ nav_order: 3
 This guide is a reference on the different kinds of test modules, setup modules, and teardown modules you can write 
 and run with marklogic-unit-test. The examples shown in this page can be found
 in the `src/test/ml-modules/root/test/suites/thesaurus` directory in the
-[test-examples project](https://github.com/marklogic-community/marklogic-unit-test/tree/master/examples/test-examples).
+[test-examples project](https://github.com/marklogic/marklogic-unit-test/tree/master/examples/test-examples).
 
 ## Location of test files
 

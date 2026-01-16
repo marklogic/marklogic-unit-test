@@ -50,14 +50,14 @@ tests. Any failed test will display a message capturing the assertion failure.
 
 ## Using JUnit5
 
-The [marklogic-junit5 library](https://github.com/marklogic-community/marklogic-unit-test/tree/master/marklogic-junit5) 
+The [marklogic-junit5 library](https://github.com/marklogic/marklogic-unit-test/tree/master/marklogic-junit5) 
 within this project provides support for testing REST endpoints in MarkLogic. It also supports running your 
 marklogic-unit-test tests as part of a JUnit test suite. This allows for a single test run to execute and report on 
 all of your tests - both your JUnit5 tests that invoke REST endpoints in MarkLogic and each of your marklogic-unit-test
 test modules.
 
 For further information, see 
-[the marklogic-junit5 example project](https://github.com/marklogic-community/marklogic-unit-test/tree/master/marklogic-junit5/examples/simple-ml-gradle)
+[the marklogic-junit5 example project](https://github.com/marklogic/marklogic-unit-test/tree/master/marklogic-junit5/examples/simple-ml-gradle)
 that describes the configuration necessary.
 
 ## Using the marklogic-unit-test REST extension

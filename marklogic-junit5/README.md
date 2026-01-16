@@ -8,7 +8,7 @@ This library makes that as simple as possible by providing the following support
 configuration you've already defined in your project
 1. Clear your test database before a test run so it always runs in a known state
 1. Easily read and make assertions on JSON and XML documents, including support for XPath-based assertions
-1. Easily integrate [marklogic-unit-test](https://github.com/marklogic-community/marklogic-unit-test) tests into a JUnit test suite
+1. Easily integrate [marklogic-unit-test](https://github.com/marklogic/marklogic-unit-test) tests into a JUnit test suite
 
 Below is a simple example of a JUnit test that writes a couple documents, runs a search on them, and then reads them 
 back and verifies the contents of each document:
@@ -45,7 +45,7 @@ As of DHF 5.5, support exists within DHF 5 for writing tests and should be used 
 See [this example project](https://github.com/marklogic/marklogic-data-hub/tree/master/examples/reference-entity-model#testing-support) 
 for more information.
 
-If you're using DHF 4, see [the DHF 4 example project](https://github.com/marklogic-community/marklogic-unit-test/tree/1.0.0/marklogic-junit5/examples/simple-dhf4)
+If you're using DHF 4, see [the DHF 4 example project](https://github.com/marklogic/marklogic-unit-test/tree/1.0.0/marklogic-junit5/examples/simple-dhf4)
 from the 1.0.0 tag of this repository. 
 
 ## Running the tests within this project
