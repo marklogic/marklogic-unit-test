@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
+ * Copyright (c) 2018-2026 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
  */
 package com.marklogic.junit5.dhf;
 
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 
 /**
  * This is a JUnit 5 parameterized test that invokes every test module defined by the REST endpoint provided by the
- * marklogic-unit-test framework - https://github.com/marklogic-community/marklogic-unit-test . This class is abstract
+ * marklogic-unit-test framework - https://github.com/marklogic/marklogic-unit-test . This class is abstract
  * so that it is not run when executing tests for the marklogic-junit5 project - it is instead expected to be extended
  * in a project that depends on marklogic-junit5.
  * <p>
