@@ -1,5 +1,5 @@
-![GitHub release](https://img.shields.io/github/release/marklogic-community/marklogic-unit-test.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/marklogic-community/marklogic-unit-test.svg)
+![GitHub release](https://img.shields.io/github/release/marklogic/marklogic-unit-test.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/marklogic/marklogic-unit-test.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # Easy testing of custom MarkLogic modules
@@ -19,5 +19,5 @@ marklogic-unit-test includes the following components:
    popular Java testing frameworks. As of the 2.0.0 release, these now require Java 17 or higher. 
 4. A REST endpoint for integrating with testing frameworks in any language.
 
-Please see [the user guide](https://marklogic-community.github.io/marklogic-unit-test/) to get started with adding
+Please see [the user guide](https://marklogic.github.io/marklogic-unit-test/) to get started with adding
 marklogic-unit-test to your project.

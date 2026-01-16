@@ -9,7 +9,7 @@ running a simple test.
 
 ## Example project description 
 
-The [example project](https://github.com/marklogic-community/marklogic-unit-test/tree/master/examples/getting-started)
+The [example project](https://github.com/marklogic/marklogic-unit-test/tree/master/examples/getting-started)
 for this guide is a simple MarkLogic application with a
 [custom REST endpoint](https://docs.marklogic.com/guide/rest-dev/extensions) named "thesaurus". The endpoint
 returns thesaurus entries via the `/example/lib.sjs` module located at `src/main/ml-modules/root` in the project.
@@ -66,7 +66,7 @@ The above configuration enables the ml-gradle `mlUnitTest` task to access the `m
 allowing it to run your marklogic-unit-test tests.
 
 If you are not using ml-gradle, you will need to manually add the marklogic-unit-test modules to your project. Please
-see [the marklogic-unit-test releases](https://github.com/marklogic-community/marklogic-unit-test/releases) for 
+see [the marklogic-unit-test releases](https://github.com/marklogic/marklogic-unit-test/releases) for 
 zip files containing these modules. 
 
 ## Writing a test
