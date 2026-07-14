@@ -10,4 +10,4 @@ startyear: 2018
 #   - Use sparingly (third_party, generated, binary assets)
 #   - Dotfiles already skipped automatically
 # Enable by removing the leading '# ' from the next line and editing values.
-filesexcluded: .github/*, docs/*, *.md, Jenkinsfile, gradle/*, *.yml, *.gradle, gradle.properties, gradlew, gradlew.bat, **/test/resources/**, *.md, *.txt, *version, *.lock
+filesexcluded: .github/*, docs/*, *.md, Jenkinsfile, gradle/*, *.yml, *.gradle, gradle.properties, gradlew, gradlew.bat, **/test/resources/**, *.md, *.txt, *version, *.lock, CODEOWNERS
